@@ -1,4 +1,7 @@
 import React from "react"
+import { LifeCycle } from "./LifeCycle"
+import { LifeCycleNew } from "./LifeCycleNew"
+import { LifeCycleOld } from "./LifeCycleOld"
 import { Login } from "./Login"
 
 const Hello = ({ name, age }) => {
@@ -15,20 +18,34 @@ const Hello = ({ name, age }) => {
     )
 }
 
-export const App2 = () => {
-    const name = 'Peter'
-    const age = 10
+export class App2 extends React.Component{
+    state = {carName:'奔驰'}
 
-    return (
-        <div>
-            <h1>Greetings</h1>
-            <Hello name="Maya" age={26 + 10} />
-            <Hello name={name} age={age} />
-            <Demo></Demo>
-            <Login></Login>
-        </div>
-    )
-}
+
+    changeCarName = () => {
+        this.setState({carName:'奥迪'})
+    }
+
+    render() {
+        const name = 'Peter'
+        const age = 10
+    
+        return (
+            <div>
+                <h1>Greetings</h1>
+                <Hello name="Maya" age={26 + 10} />
+                <Hello name={name} age={age} />
+                <Demo></Demo>
+                <Login></Login>
+                <LifeCycle></LifeCycle>
+                <button onClick={this.changeCarName}>更改车名</button>
+                {/* <LifeCycleOld carName={this.state.carName}/> */}
+                <LifeCycleNew carName={this.state.carName}/>
+            </div>
+        )
+    }
+    }
+    
 
 class Demo extends React.Component {
 
