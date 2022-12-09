@@ -18,7 +18,7 @@ const Hello = ({ name, age }) => {
     )
 }
 
-export class App2 extends React.Component{
+export class App extends React.Component{
     state = {carName:'奔驰'}
 
 

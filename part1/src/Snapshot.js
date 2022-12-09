@@ -1,12 +1,12 @@
 import React from "react";
 
-export class LifeCycleNew extends React.Component {
+export class NewsList extends React.Component {
 
     constructor(props) {
         console.log('LifecycleNew-constructor')
         super(props)
         //初始化状态
-        this.state = { count: 0 }
+        this.state  = { count: 0 }
     }
 
     //首次刷新时不调用
@@ -65,7 +65,7 @@ export class LifeCycleNew extends React.Component {
         return (
 
             <div>
-                <h1>React新生命周期</h1>
+                <h1>getSnapshotBeforeupdate案例</h1>
                 <h2>当前求和为{count}</h2>
                 <h2>{this.props.carName}</h2>
                 <button onClick={this.add}>点我+1</button>
