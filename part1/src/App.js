@@ -1,8 +1,8 @@
 import React from "react"
 import { LifeCycle } from "./LifeCycle"
 import { LifeCycleNew } from "./LifeCycleNew"
-import { LifeCycleOld } from "./LifeCycleOld"
 import { Login } from "./Login"
+import {Person} from "./Person";
 
 const Hello = ({ name, age }) => {
 
@@ -41,6 +41,8 @@ export class App extends React.Component{
                 <button onClick={this.changeCarName}>更改车名</button>
                 {/* <LifeCycleOld carName={this.state.carName}/> */}
                 <LifeCycleNew carName={this.state.carName}/>
+                <Person/>
+
             </div>
         )
     }
