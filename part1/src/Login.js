@@ -1,4 +1,5 @@
 import React from "react";
+import PubSub from "pubsub-js";
 
 export class Login extends React.Component {
     state = {
@@ -17,7 +18,8 @@ export class Login extends React.Component {
     handleSubmit = (event) => {
         event.preventDefault()
         const { username, password } = this.state;
-        alert(`你输入的用户名是${username},密码是${password}`)
+        alert(`你输入的用户名是${username},密码是${password}`);
+        PubSub.publish('my-topic','Hello World!');
     }
 
     saveFormData = (dataType) => {

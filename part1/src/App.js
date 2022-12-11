@@ -3,6 +3,7 @@ import { LifeCycle } from "./LifeCycle"
 import { LifeCycleNew } from "./LifeCycleNew"
 import { Login } from "./Login"
 import {Person} from "./Person";
+import ReactRefs from "./ReactRefs";
 
 const Hello = ({ name, age }) => {
 
@@ -32,7 +33,7 @@ export class App extends React.Component{
     
         return (
             <div>
-                <h1>Greetings</h1>
+                <ReactRefs/>
                 <Hello name="Maya" age={26 + 10} />
                 <Hello name={name} age={age} />
                 <Demo></Demo>
