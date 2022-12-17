@@ -7,7 +7,7 @@ const initState = 0
  * @returns 新的状态
  */
 const countReducer = (preState = initState, action) => {
-    console.log(preState,action)
+    console.log(preState, action)
     const { type, data } = action;
     if (preState === undefined) {
         preState = 0;

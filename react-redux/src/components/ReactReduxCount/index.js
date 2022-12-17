@@ -1,57 +1,39 @@
 import React, { Component } from 'react'
-import { createIncrementAsynAction } from '../../redux/count-action'
+// import { createIncrementAsynAction,createIncrementAction } from '../../redux/count-action'
 import store from '../../redux/store'
-export default class ReaduxCount extends Component {
+export default class ReactReaduxCount extends Component {
 
     state = { carName: '奔驰c63' }
     selectedValue = React.createRef()
 
-    componentDidMount() {
-        //监测Redux状态变化，只要变化就调用Render
-        store.subscribe(
-            () => {
-                this.setState({})
-            }
-        )
-    }
+    // componentDidMount() {
+    //     //监测Redux状态变化，只要变化就调用Render
+    //     store.subscribe(
+    //         () => {
+    //             this.setState({})
+    //         }
+    //     )
+    // }
 
     increment = () => {
         const value = this.selectedValue.current.value;
         //通知Redux加value
-        store.dispatch(
-            {
-                type: 'increment',
-                data: value * 1
-            }
-        )
+        // store.dispatch(createIncrementAction(value*1))
     }
     decrement = () => {
         const value = this.selectedValue.current.value;
 
-        store.dispatch(
-            {
-                type: 'decrement',
-                data: value * 1
-            }
-        )
+        
     }
     incrementIfOdd = () => {
         let count = store.getState();
         const value = this.selectedValue.current.value;
 
-        if (count % 2 !== 0) {
-            store.dispatch(
-                {
-                    type: 'increment',
-                    data: value * 1
-                }
-            )
-        }
     }
     incrementAsync = () => {
         const value = this.selectedValue.current.value;
 
-        store.dispatch(createIncrementAsynAction(value * 1), 500)
+        // store.dispatch(createIncrementAsynAction(value * 1), 500)
     }
 
     render() {
