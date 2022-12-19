@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
-import Count from './components/Count'
-import ReaduxCount from './components/ReduxCount'
-import CountConainer from './containers/Count'
-import store from './redux/store'
+import ReactReaduxCount from './components/ReactReduxCount'
+import Person from './components/Person'
 
 export default class App extends Component {
   render() {
     return (
       <div>
-        
-        <Count/>
-        <ReaduxCount/>
-        <CountConainer store={store}/>
+
+        {/* <Count/> */}
+        {/* <ReaduxCount/> */}
+        <ReactReaduxCount/>
+        <hr />
+        <Person />
 
       </div>
     )

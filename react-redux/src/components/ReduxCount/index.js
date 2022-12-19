@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { createIncrementAsynAction } from '../../redux/count-action'
+import { createIncrementAsynAction } from '../../redux/actions/count'
 import store from '../../redux/store'
 export default class ReaduxCount extends Component {
 
