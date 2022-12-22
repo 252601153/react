@@ -1,9 +1,9 @@
 import {nanoid} from "nanoid";
-import React, {Component} from "react";
+import React, {Component, PureComponent} from "react";
 import {connect} from "react-redux";
 import {addPerson} from "../../redux/actions/person-action";
 
-class Person extends Component {
+class Person extends PureComponent {
     addPerson = () => {
         const name = this.nameNode.value;
         const age = this.ageNode.value;
