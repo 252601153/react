@@ -9,8 +9,9 @@ module.exports = {
         //文件的输出路径，绝对路径 __dirname当前文件的文件夹目录
         path: path.resolve(__dirname, "dist"),
 
-        //文件名
-        filename: "main.js",
+        //入口文件打包输出文件名
+        filename: "static/js/main.js",
+        clean: true,
     },
     //loader
     module: {
@@ -48,20 +49,31 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(png|jpe?g|gif|webp)$/,
-                type: "asset",//类型设置为asset，当作file-loader处理，webpack5内置
-            },
-            {
-                test: /\.(png|jpe?g|gif|webp)$/,
+                //类型设置为asset，当作file-loader处理，webpack5内置
+                test: /\.(png|jpe?g|gif|webp|svg)$/,
                 type: "asset",
                 parser: {
                     dataUrlCondition: {
                         //大小小于40kb时转化为base64
                         //优点后无需重复下载减少请求数量
                         //缺点是会变大
-                        maxSize: 40 * 1024, 
+                        maxSize: 40 * 1024,
                     },
                 },
+                generator: {
+                    //输出的文件的名称
+                    filename: "static/images/[hash:10][ext][query]",
+                }
+            },
+            {
+                //打包字体文件
+                test: /\.(ttf|woff2?)$/,
+                type: "asset/resource",//不会转base64
+            
+                generator: {
+                    //输出的文件的名称
+                    filename: "static/media/[hash:10][ext][query]",
+                }
             },
         ],
     },
