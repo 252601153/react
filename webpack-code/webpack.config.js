@@ -78,6 +78,16 @@ module.exports = {
                     filename: "static/media/[hash:10][ext][query]",
                 }
             },
+            {
+                test:/\.jsx?$/,
+                exclude:/node_modules/,//排除
+                use:{
+                    loader:'babel-loader',
+                    // options:{
+                    //     presets:['@babel/preset-env']
+                    // }
+                }
+            },
         ],
     },
 
