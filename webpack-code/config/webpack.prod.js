@@ -107,7 +107,9 @@ module.exports = {
             //以index.html作为模板生成新的html文件,dom结构一致，自动引入打包的资源
             template: path.resolve(__dirname, '../public/index.html')
         }),
-        new MiniCssExtractPlugin(),
+        new MiniCssExtractPlugin({
+            filename:"static/css/main.css"
+        }),
 
     ],
 

@@ -9,18 +9,18 @@
 .box2 {
   width: 100px;
   height: 110px;
-  background-image: url(static/images/074d0a3966.png);
+  background-image: url(../../static/images/074d0a3966.png);
   background-size: cover;
 }
 
-.box3{width:100px;height:100px;background-image:url(static/images/98c95f8a28.gif);background-size:cover}
+.box3{width:100px;height:100px;background-image:url(../../static/images/98c95f8a28.gif);background-size:cover}
 .box4{width:100px;height:100px;background-color:hotpink}
 .box5{width:100px;height:100px;background-color:#9acd32}
 @font-face {
   font-family: "iconfont"; /* Project id 3844607 */
-  src: url(static/media/1f4f6ba856.woff2?t=1672305593835) format('woff2'),
-       url(static/media/653ff71fe8.woff?t=1672305593835) format('woff'),
-       url(static/media/7512dc8a67.ttf?t=1672305593835) format('truetype');
+  src: url(../../static/media/1f4f6ba856.woff2?t=1672305593835) format('woff2'),
+       url(../../static/media/653ff71fe8.woff?t=1672305593835) format('woff'),
+       url(../../static/media/7512dc8a67.ttf?t=1672305593835) format('truetype');
 }
 
 .iconfont {
