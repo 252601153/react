@@ -1,4 +1,6 @@
 .box1{
+    display: -ms-flexbox;
+    display: flex;
     width: 100px;
     height: 100px;
     /* background-color: pink; */
@@ -25,6 +27,9 @@
 
 .iconfont {
   font-family: "iconfont" !important;
+}
+
+.iconfont {
   font-size: 16px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;

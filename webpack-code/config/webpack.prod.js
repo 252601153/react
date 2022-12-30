@@ -6,6 +6,17 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 //css单独打包成文件的插件，不使用该插件默认是混合在js文件中的
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const postcssLoader = {
+    loader: 'postcss-loader',
+    options: {
+        postcssOptions: {
+            plugins: [
+                "postcss-preset-env",//能解决大部分样式兼容性问题
+            ]
+        }
+
+    },
+};
 
 module.exports = {
     //入口
@@ -31,6 +42,7 @@ module.exports = {
                 use: [ // 执行顺序，从后到前，先执行css-loader
                     MiniCssExtractPlugin.loader, //提取css成单独文件
                     "css-loader",// 将css资源编译成commonjs的模块到js中
+                    postcssLoader,
                 ]
             },
             {
@@ -38,6 +50,7 @@ module.exports = {
                 use: [ // 执行顺序，从后到前，先执行css-loader
                     MiniCssExtractPlugin.loader,//将js中的css通过style标签添加到html文件中生效
                     "css-loader",// 将css资源编译成commonjs的模块到js中
+                    postcssLoader,
                     "less-loader",// 将less编译成css文件
                 ]
             },
@@ -46,6 +59,7 @@ module.exports = {
                 use: [ // 执行顺序，从后到前，先执行css-loader
                     MiniCssExtractPlugin.loader,//将js中的css通过style标签添加到html文件中生效
                     "css-loader",// 将css资源编译成commonjs的模块到js中
+                    postcssLoader,
                     "sass-loader",// 将sass编译成css文件
                 ]
             },
@@ -54,6 +68,7 @@ module.exports = {
                 use: [ // 执行顺序，从后到前，先执行css-loader
                     MiniCssExtractPlugin.loader, //将js中的css通过style标签添加到html文件中生效
                     "css-loader",// 将css资源编译成commonjs的模块到js中
+                    postcssLoader,
                     "stylus-loader",// 将stylus编译成css文件
                 ]
             },
@@ -108,7 +123,7 @@ module.exports = {
             template: path.resolve(__dirname, '../public/index.html')
         }),
         new MiniCssExtractPlugin({
-            filename:"static/css/main.css"
+            filename: "static/css/main.css"
         }),
 
     ],
