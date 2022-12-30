@@ -6,6 +6,8 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 //css单独打包成文件的插件，不使用该插件默认是混合在js文件中的
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+//
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 //css兼容性处理
 const postcssLoader = {
@@ -118,6 +120,7 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: "static/css/main.css"
         }),
+        new CssMinimizerPlugin(),
 
     ],
 
