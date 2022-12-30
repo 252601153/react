@@ -11,10 +11,12 @@ module.exports = {
     //输出
     output: {
         //文件的输出路径，绝对路径 __dirname当前文件的文件夹目录
-        path: path.resolve(__dirname, "dist"),
+        path: path.resolve(__dirname, "../dist"),
 
         //入口文件打包输出文件名
         filename: "static/js/main.js",
+
+        //清空上次打包的内容
         clean: true,
     },
     //loader
@@ -96,22 +98,17 @@ module.exports = {
     plugins: [
         new ESLintPlugin({
             //检测哪些文件
-            context: path.resolve(__dirname, "src"),
+            context: path.resolve(__dirname, "../src"),
         }),
         new HtmlWebpackPlugin({
             //以index.html作为模板生成新的html文件,dom结构一致，自动引入打包的资源
-            template: path.resolve(__dirname, 'public/index.html')
+            template: path.resolve(__dirname, '../public/index.html')
         }),
 
     ],
 
-    //开发服务器，不会输出资源，在内存中编译打包
-    devServer: {
-        host: 'localhost',
-        port: '3000',
-        open: true, //是否自动打开浏览器
-    },
+    
 
     //mode
-    mode: "development"
+    mode: "production"
 }
