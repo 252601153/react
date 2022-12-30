@@ -1,5 +1,8 @@
 const path = require("path");
 
+//引入ESLint插件
+const ESLintPlugin = require('eslint-webpack-plugin');
+
 module.exports = {
     //入口
     entry: './src/main.js',
@@ -80,6 +83,10 @@ module.exports = {
 
     //plugin
     plugins: [
+        new ESLintPlugin({
+            //检测哪些文件
+            context: path.resolve(__dirname,"src"),
+        }),
 
     ],
 
