@@ -73,17 +73,17 @@ module.exports = {
                 //打包字体文件
                 test: /\.(ttf|woff2?)$/,
                 type: "asset/resource",//不会转base64
-            
+
                 generator: {
                     //输出的文件的名称
                     filename: "static/media/[hash:10][ext][query]",
                 }
             },
             {
-                test:/\.jsx?$/,
-                exclude:/node_modules/,//排除
-                use:{
-                    loader:'babel-loader',
+                test: /\.jsx?$/,
+                exclude: /node_modules/,//排除
+                use: {
+                    loader: 'babel-loader',
                     // options:{
                     //     presets:['@babel/preset-env']
                     // }
@@ -96,19 +96,20 @@ module.exports = {
     plugins: [
         new ESLintPlugin({
             //检测哪些文件
-            context: path.resolve(__dirname,"src"),
+            context: path.resolve(__dirname, "src"),
         }),
         new HtmlWebpackPlugin({
             //以index.html作为模板生成新的html文件,dom结构一致，自动引入打包的资源
-            template:path.resolve(__dirname,'public/index.html')
+            template: path.resolve(__dirname, 'public/index.html')
         }),
 
     ],
 
+    //开发服务器，不会输出资源，在内存中编译打包
     devServer: {
-        host:'localhost',
-        port:'3000',
-        open:true, //是否自动打开浏览器
+        host: 'localhost',
+        port: '3000',
+        open: true, //是否自动打开浏览器
     },
 
     //mode
