@@ -2,6 +2,7 @@ const path = require("path");
 
 //引入ESLint插件
 const ESLintPlugin = require('eslint-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
     //入口
@@ -96,6 +97,10 @@ module.exports = {
         new ESLintPlugin({
             //检测哪些文件
             context: path.resolve(__dirname,"src"),
+        }),
+        new HtmlWebpackPlugin({
+            //以index.html作为模板生成新的html文件,dom结构一致，自动引入打包的资源
+            template:path.resolve(__dirname,'public/index.html')
         }),
 
     ],
