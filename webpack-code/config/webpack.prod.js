@@ -2,7 +2,10 @@ const path = require("path");
 
 //引入ESLint插件
 const ESLintPlugin = require('eslint-webpack-plugin');
+//html自动引入打包后的js插件
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+//css单独打包成文件的插件，不使用该插件默认是混合在js文件中的
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
     //入口
@@ -26,14 +29,14 @@ module.exports = {
             {
                 test: /\.css$/, // 只检测.css结尾的文件
                 use: [ // 执行顺序，从后到前，先执行css-loader
-                    "style-loader", //将js中的css通过style标签添加到html文件中生效
+                    MiniCssExtractPlugin.loader, //提取css成单独文件
                     "css-loader",// 将css资源编译成commonjs的模块到js中
                 ]
             },
             {
                 test: /\.less$/, // 只检测.css结尾的文件
                 use: [ // 执行顺序，从后到前，先执行css-loader
-                    "style-loader", //将js中的css通过style标签添加到html文件中生效
+                    MiniCssExtractPlugin.loader,//将js中的css通过style标签添加到html文件中生效
                     "css-loader",// 将css资源编译成commonjs的模块到js中
                     "less-loader",// 将less编译成css文件
                 ]
@@ -41,7 +44,7 @@ module.exports = {
             {
                 test: /\.s[ac]ss$/, // 只检测.css结尾的文件
                 use: [ // 执行顺序，从后到前，先执行css-loader
-                    "style-loader", //将js中的css通过style标签添加到html文件中生效
+                    MiniCssExtractPlugin.loader,//将js中的css通过style标签添加到html文件中生效
                     "css-loader",// 将css资源编译成commonjs的模块到js中
                     "sass-loader",// 将sass编译成css文件
                 ]
@@ -49,7 +52,7 @@ module.exports = {
             {
                 test: /\.styl$/, // 只检测.css结尾的文件
                 use: [ // 执行顺序，从后到前，先执行css-loader
-                    "style-loader", //将js中的css通过style标签添加到html文件中生效
+                    MiniCssExtractPlugin.loader, //将js中的css通过style标签添加到html文件中生效
                     "css-loader",// 将css资源编译成commonjs的模块到js中
                     "stylus-loader",// 将stylus编译成css文件
                 ]
@@ -104,10 +107,11 @@ module.exports = {
             //以index.html作为模板生成新的html文件,dom结构一致，自动引入打包的资源
             template: path.resolve(__dirname, '../public/index.html')
         }),
+        new MiniCssExtractPlugin(),
 
     ],
 
-    
+
 
     //mode
     mode: "production"
