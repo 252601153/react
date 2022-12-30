@@ -1,5 +1,4 @@
 .box1{
-    display: -ms-flexbox;
     display: flex;
     width: 100px;
     height: 100px;

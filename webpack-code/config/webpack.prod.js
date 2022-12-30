@@ -6,6 +6,8 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 //css单独打包成文件的插件，不使用该插件默认是混合在js文件中的
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+
+//css兼容性处理
 const postcssLoader = {
     loader: 'postcss-loader',
     options: {
@@ -17,6 +19,16 @@ const postcssLoader = {
 
     },
 };
+
+//用来获取处理样式的loader
+function getStyleLoader(pre) {
+    return [ // 执行顺序，从后到前，先执行css-loader
+        MiniCssExtractPlugin.loader, //提取css成单独文件
+        "css-loader",// 将css资源编译成commonjs的模块到js中
+        postcssLoader,
+        pre,
+    ].filter(Boolean);//过滤undefined
+}
 
 module.exports = {
     //入口
@@ -39,38 +51,19 @@ module.exports = {
             //loader的配置
             {
                 test: /\.css$/, // 只检测.css结尾的文件
-                use: [ // 执行顺序，从后到前，先执行css-loader
-                    MiniCssExtractPlugin.loader, //提取css成单独文件
-                    "css-loader",// 将css资源编译成commonjs的模块到js中
-                    postcssLoader,
-                ]
+                use: getStyleLoader(),
             },
             {
                 test: /\.less$/, // 只检测.css结尾的文件
-                use: [ // 执行顺序，从后到前，先执行css-loader
-                    MiniCssExtractPlugin.loader,//将js中的css通过style标签添加到html文件中生效
-                    "css-loader",// 将css资源编译成commonjs的模块到js中
-                    postcssLoader,
-                    "less-loader",// 将less编译成css文件
-                ]
+                use: getStyleLoader("less-loader")
             },
             {
                 test: /\.s[ac]ss$/, // 只检测.css结尾的文件
-                use: [ // 执行顺序，从后到前，先执行css-loader
-                    MiniCssExtractPlugin.loader,//将js中的css通过style标签添加到html文件中生效
-                    "css-loader",// 将css资源编译成commonjs的模块到js中
-                    postcssLoader,
-                    "sass-loader",// 将sass编译成css文件
-                ]
+                use:getStyleLoader("sass-loader")
             },
             {
                 test: /\.styl$/, // 只检测.css结尾的文件
-                use: [ // 执行顺序，从后到前，先执行css-loader
-                    MiniCssExtractPlugin.loader, //将js中的css通过style标签添加到html文件中生效
-                    "css-loader",// 将css资源编译成commonjs的模块到js中
-                    postcssLoader,
-                    "stylus-loader",// 将stylus编译成css文件
-                ]
+                use: getStyleLoader( "stylus-loader") 
             },
             {
                 //类型设置为asset，当作file-loader处理，webpack5内置
