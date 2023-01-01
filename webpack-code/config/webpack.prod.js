@@ -1,4 +1,13 @@
 const path = require("path");
+//nodejs核心模块，直接调用
+const os = require("os");
+//cpu核数
+const threads = os.cpus().length;
+console.log('cpu threads num is', threads)
+
+//js压缩插件，只要开启生产模式默认启用了
+const TerserWebpackPlugin = require("terser-webpack-plugin");
+
 
 //引入ESLint插件
 const ESLintPlugin = require('eslint-webpack-plugin');
@@ -100,14 +109,22 @@ module.exports = {
                         test: /\.jsx?$/,
                         // exclude: /node_modules/,//排除node_modules下的文件，其他都处理
                         include: path.resolve(__dirname, "../src"), //只包含src目录下的文件，和exclude只能二选一
-                        use: {
-                            loader: 'babel-loader',
-                            options:{
-                                // presets:['@babel/preset-env']
-                                cacheDirectory:true, //开启babel缓存
-                                cacheCompression:false, //关闭缓存文件压缩
+                        use: [
+                            {
+                                loader: "thread-loader",//开启多进程
+                                options: {
+                                    works: threads, //进程数量
+                                },
+                            },
+                            {
+                                loader: 'babel-loader',
+                                options: {
+                                    // presets:['@babel/preset-env']
+                                    cacheDirectory: true, //开启babel缓存
+                                    cacheCompression: false, //关闭缓存文件压缩
+                                }
                             }
-                        }
+                        ]
                     },
                 ]
             },
@@ -122,7 +139,8 @@ module.exports = {
             context: path.resolve(__dirname, "../src"),
             exclude: "node_modules",
             cache: true, //开启缓存
-            cacheLocation: path.resolve(__dirname, "../node_modules/.cache/eslintcache") //eslint缓存地址
+            cacheLocation: path.resolve(__dirname, "../node_modules/.cache/eslintcache"),//eslint缓存地址
+            threads, //eslint开启多进程
         }),
         new HtmlWebpackPlugin({
             //以index.html作为模板生成新的html文件,dom结构一致，自动引入打包的资源
@@ -131,9 +149,19 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: "static/css/main.css"
         }),
-        new CssMinimizerPlugin(),
-
+        
     ],
+
+    //webpack5压缩建议放optimization
+    optimization: {
+        minimizer: [
+            new CssMinimizerPlugin(), //css压缩插件
+            new TerserWebpackPlugin({
+                parallel: threads //js压缩插件开启多进程，手动写这个插件的原因是为了配置多进程
+            }),
+    
+        ]
+    },
     //mode
     mode: "production",
     devtool: "source-map"
