@@ -123,9 +123,7 @@ module.exports = {
         new CssMinimizerPlugin(),
 
     ],
-
-
-
     //mode
-    mode: "production"
+    mode: "production",
+    devtool: "source-map"
 }
