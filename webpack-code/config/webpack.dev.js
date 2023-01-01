@@ -106,6 +106,7 @@ module.exports = {
         new ESLintPlugin({
             //检测哪些文件，绝对路径修改
             context: path.resolve(__dirname, "../src"),
+            include: path.resolve(__dirname, "../src"),
         }),
         new HtmlWebpackPlugin({
             //以index.html作为模板生成新的html文件,dom结构一致，自动引入打包的资源

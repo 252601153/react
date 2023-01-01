@@ -6,7 +6,7 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 //css单独打包成文件的插件，不使用该插件默认是混合在js文件中的
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-//
+//css压缩插件
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 //css兼容性处理
@@ -98,7 +98,8 @@ module.exports = {
                     },
                     {
                         test: /\.jsx?$/,
-                        exclude: /node_modules/,//排除
+                        // exclude: /node_modules/,//排除node_modules下的文件，其他都处理
+                        include: path.resolve(__dirname, "../src"), //只包含src目录下的文件，和exclude只能二选一
                         use: {
                             loader: 'babel-loader',
                             // options:{
@@ -117,6 +118,7 @@ module.exports = {
         new ESLintPlugin({
             //检测哪些文件
             context: path.resolve(__dirname, "../src"),
+            exclude: "node_modules",
         }),
         new HtmlWebpackPlugin({
             //以index.html作为模板生成新的html文件,dom结构一致，自动引入打包的资源
