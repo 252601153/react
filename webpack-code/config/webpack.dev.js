@@ -89,9 +89,11 @@ module.exports = {
                         exclude: /node_modules/,//排除
                         use: {
                             loader: 'babel-loader',
-                            // options:{
-                            //     presets:['@babel/preset-env']
-                            // }
+                            options:{
+                                // presets:['@babel/preset-env']
+                                cacheDirectory:true, //开启babel缓存
+                                cacheCompression:false, //关闭缓存文件压缩
+                            }
                         }
                     },
                 ]
@@ -107,6 +109,8 @@ module.exports = {
             //检测哪些文件，绝对路径修改
             context: path.resolve(__dirname, "../src"),
             include: path.resolve(__dirname, "../src"),
+            cache: true, //开启缓存
+            cacheLocation: path.resolve(__dirname, "../node_modules/.cache/eslintcache") //eslint缓存地址
         }),
         new HtmlWebpackPlugin({
             //以index.html作为模板生成新的html文件,dom结构一致，自动引入打包的资源

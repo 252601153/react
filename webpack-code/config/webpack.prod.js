@@ -102,9 +102,11 @@ module.exports = {
                         include: path.resolve(__dirname, "../src"), //只包含src目录下的文件，和exclude只能二选一
                         use: {
                             loader: 'babel-loader',
-                            // options:{
-                            //     presets:['@babel/preset-env']
-                            // }
+                            options:{
+                                // presets:['@babel/preset-env']
+                                cacheDirectory:true, //开启babel缓存
+                                cacheCompression:false, //关闭缓存文件压缩
+                            }
                         }
                     },
                 ]
@@ -119,6 +121,8 @@ module.exports = {
             //检测哪些文件
             context: path.resolve(__dirname, "../src"),
             exclude: "node_modules",
+            cache: true, //开启缓存
+            cacheLocation: path.resolve(__dirname, "../node_modules/.cache/eslintcache") //eslint缓存地址
         }),
         new HtmlWebpackPlugin({
             //以index.html作为模板生成新的html文件,dom结构一致，自动引入打包的资源
