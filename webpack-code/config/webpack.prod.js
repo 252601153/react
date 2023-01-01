@@ -50,60 +50,65 @@ module.exports = {
     //loader
     module: {
         rules: [
-            //loader的配置
             {
-                test: /\.css$/, // 只检测.css结尾的文件
-                use: getStyleLoader(),
-            },
-            {
-                test: /\.less$/, // 只检测.css结尾的文件
-                use: getStyleLoader("less-loader")
-            },
-            {
-                test: /\.s[ac]ss$/, // 只检测.css结尾的文件
-                use:getStyleLoader("sass-loader")
-            },
-            {
-                test: /\.styl$/, // 只检测.css结尾的文件
-                use: getStyleLoader( "stylus-loader") 
-            },
-            {
-                //类型设置为asset，当作file-loader处理，webpack5内置
-                test: /\.(png|jpe?g|gif|webp|svg)$/,
-                type: "asset",
-                parser: {
-                    dataUrlCondition: {
-                        //大小小于40kb时转化为base64
-                        //优点后无需重复下载减少请求数量
-                        //缺点是会变大
-                        maxSize: 40 * 1024,
+                oneOf: [
+                    //loader的配置
+                    {
+                        test: /\.css$/, // 只检测.css结尾的文件
+                        use: getStyleLoader(),
                     },
-                },
-                generator: {
-                    //输出的文件的名称
-                    filename: "static/images/[hash:10][ext][query]",
-                }
-            },
-            {
-                //打包字体文件
-                test: /\.(ttf|woff2?)$/,
-                type: "asset/resource",//不会转base64
+                    {
+                        test: /\.less$/, // 只检测.css结尾的文件
+                        use: getStyleLoader("less-loader")
+                    },
+                    {
+                        test: /\.s[ac]ss$/, // 只检测.css结尾的文件
+                        use: getStyleLoader("sass-loader")
+                    },
+                    {
+                        test: /\.styl$/, // 只检测.css结尾的文件
+                        use: getStyleLoader("stylus-loader")
+                    },
+                    {
+                        //类型设置为asset，当作file-loader处理，webpack5内置
+                        test: /\.(png|jpe?g|gif|webp|svg)$/,
+                        type: "asset",
+                        parser: {
+                            dataUrlCondition: {
+                                //大小小于40kb时转化为base64
+                                //优点后无需重复下载减少请求数量
+                                //缺点是会变大
+                                maxSize: 40 * 1024,
+                            },
+                        },
+                        generator: {
+                            //输出的文件的名称
+                            filename: "static/images/[hash:10][ext][query]",
+                        }
+                    },
+                    {
+                        //打包字体文件
+                        test: /\.(ttf|woff2?)$/,
+                        type: "asset/resource",//不会转base64
 
-                generator: {
-                    //输出的文件的名称
-                    filename: "static/media/[hash:10][ext][query]",
-                }
+                        generator: {
+                            //输出的文件的名称
+                            filename: "static/media/[hash:10][ext][query]",
+                        }
+                    },
+                    {
+                        test: /\.jsx?$/,
+                        exclude: /node_modules/,//排除
+                        use: {
+                            loader: 'babel-loader',
+                            // options:{
+                            //     presets:['@babel/preset-env']
+                            // }
+                        }
+                    },
+                ]
             },
-            {
-                test: /\.jsx?$/,
-                exclude: /node_modules/,//排除
-                use: {
-                    loader: 'babel-loader',
-                    // options:{
-                    //     presets:['@babel/preset-env']
-                    // }
-                }
-            },
+
         ],
     },
 
