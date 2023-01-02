@@ -18,6 +18,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 //css压缩插件
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
+//图片压缩插件
+// const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+
+
 //css兼容性处理
 const postcssLoader = {
     loader: 'postcss-loader',
@@ -155,6 +159,35 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: "static/css/main.css"
         }),
+
+        //图片压缩，无损压缩
+        // new ImageMinimizerPlugin({
+        //     minimizer: {
+        //       implementation: ImageMinimizerPlugin.imageminGenerate,
+        //       options: {
+        //         plugins: [
+        //           ["gifsicle", { interlaced: true }],
+        //           ["jpegtran", { progressive: true }],
+        //           ["optipng", { optimizationLevel: 5 }],
+        //           [
+        //             "svgo",
+        //             {
+        //               plugins: [
+        //                 "preset-default",
+        //                 "prefixIds",
+        //                 {
+        //                   name: "sortAttrs",
+        //                   params: {
+        //                     xmlnsOrder: "alphabetical",
+        //                   },
+        //                 },
+        //               ],
+        //             },
+        //           ],
+        //         ],
+        //       },
+        //     },
+        //   }),
 
     ],
 
