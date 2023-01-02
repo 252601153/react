@@ -92,6 +92,11 @@ module.exports = {
                         },
                         generator: {
                             //输出的文件的名称
+                            // 将图片文件输出到 static/imgs 目录中
+                            // 将图片文件命名 [hash:8][ext][query]
+                            // [hash:8]: hash值取8位
+                            // [ext]: 使用之前的文件扩展名
+                            // [query]: 添加之前的query参数
                             filename: "static/images/[hash:10][ext][query]",
                         }
                     },
@@ -122,6 +127,7 @@ module.exports = {
                                     // presets:['@babel/preset-env']
                                     cacheDirectory: true, //开启babel缓存
                                     cacheCompression: false, //关闭缓存文件压缩
+                                    plugins:["@babel/plugin-transform-runtime"],//减少代码体积
                                 }
                             }
                         ]
@@ -149,7 +155,7 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: "static/css/main.css"
         }),
-        
+
     ],
 
     //webpack5压缩建议放optimization
@@ -159,7 +165,7 @@ module.exports = {
             new TerserWebpackPlugin({
                 parallel: threads //js压缩插件开启多进程，手动写这个插件的原因是为了配置多进程
             }),
-    
+
         ]
     },
     //mode
