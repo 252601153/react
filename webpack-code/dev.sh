@@ -1,0 +1,1 @@
+npx webpack serve --config ./config/webpack.dev.js
