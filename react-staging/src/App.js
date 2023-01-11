@@ -1,7 +1,5 @@
-import './App.css';
 import React, {Component} from 'react'
-import Hello from './components/Hello';
-import Welcome from './components/Welcome'
+import FileInput from './components/FileInput/FileInput';
 import TodoList from './components/TodoList';
 
 export default class App extends Component {
@@ -10,6 +8,8 @@ export default class App extends Component {
     return (
       <div>
         <TodoList ></TodoList>
+        <br />
+        <FileInput></FileInput>
       </div>
     );
   }
